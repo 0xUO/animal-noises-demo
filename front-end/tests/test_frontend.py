@@ -7,7 +7,7 @@ from flask_testing import TestCase
 class TestBase(TestCase):
     def create_app(self):
         app.config.update(
-            SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
+            SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db',
             DEBUG = True
         )
         return app
