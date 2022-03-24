@@ -10,14 +10,14 @@ pipeline {
             environment {
                 DOCKER_CREDS = credentials('docker-creds')
             }
-            steps {
-                sh "/bin/bash -c 'docker rmi -f \$(docker images -q)'"
+            steps {               
                 sh "docker-compose build --parallel"
                 sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
                 sh "docker-compose push"
+                sh "/bin/bash -c 'docker rmi -f \$(docker images -q)'"
             }
         }
-        stage('deploy stack') {
+        stage('deploy swarm') {
             steps {
                 sh "echo '    driver: overlay' >> docker-compose.yaml"
                 sh "scp ./docker-compose.yaml jenkins@swarm-manager:/home/jenkins/docker-compose.yaml"
