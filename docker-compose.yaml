@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  mysql:
+    image: uchechi/animal-noise-db:latest
+    build: ./db
+    volumes:
+      - type: volume
+        source: animal-vol
+        target: /var/lib/mysql
+    networks:
+      - "animal-net"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: animal_db
+  front-end:
+    image: uchechi/animal-noise-front:latest
+    build: ./front-end
+    ports:
+      - published: 80
+        target: 5000
+        protocol: tcp
+    networks:
+      - "animal-net"
+    depends_on:
+      - "mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  animal-api:
+    image: uchechi/animal-noise-animal:latest
+    build: ./animal-api
+    networks:
+      - "animal-net"
+  noise-api:
+    image: uchechi/animal-noise-noise:latest
+    build: ./noise-api
+    networks:
+      - "animal-net"
+networks:
+  animal-net:
+volumes:
+  animal-vol:
