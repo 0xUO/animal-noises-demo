@@ -19,13 +19,13 @@ class TestView(TestBase):
     def test_get_animal_dog(self, mock_func):
         response = self.client.get(url_for('get_animal'))
         self.assert200(response)
-        self.assertIn(b'cat', response.data)
+        self.assertIn(b'dog', response.data)
 
     @patch('application.routes.choice', return_value='cow')
     def test_get_animal_cow(self, mock_func):
         response = self.client.get(url_for('get_animal'))
         self.assert200(response)
-        self.assertIn(b'cat', response.data)
+        self.assertIn(b'cow', response.data)
 
 
 

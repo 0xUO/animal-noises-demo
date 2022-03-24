@@ -7,7 +7,7 @@ from flask_testing import TestCase
 class TestBase(TestCase):
     def create_app(self):
         app.config.update(
-            SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
+            SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db',
             DEBUG = True
         )
         return app
@@ -26,7 +26,7 @@ class TestView(TestBase):
     def test_get_frontend(self):
         with requests_mock.Mocker() as m:
             m.get('http://animal-api:5000/get-animal', json={'animal':'dog'})
-            m.post('http://noise-api:5000/noise', json{'noise':'woof'})
+            m.post('http://noise-api:5000/noise', json={'noise':'woof'})
             response = self.client.get(url_for('index'))
             self.assert200(response)
             self.assertIn(b'cat goes meow', response.data)
