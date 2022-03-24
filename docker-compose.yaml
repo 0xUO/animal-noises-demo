@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   mysql:
-    image: uche96/animal-noise-db:latest
+    image: uchechi/animal-noise-db:latest
     build: ./db
     volumes:
       - type: volume
@@ -13,7 +13,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: animal_db
   front-end:
-    image: uche96/animal-noise-front:latest
+    image: uchechi/animal-noise-front:latest
     build: ./front-end
     networks:
       - "animal-net"
@@ -24,12 +24,12 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
   animal-api:
-    image: uche96/animal-noise-animal:latest
+    image: uchechi/animal-noise-animal:latest
     build: ./animal-api
     networks:
       - "animal-net"
   noise-api:
-    image: uche96/animal-noise-noise:latest
+    image: uchechi/animal-noise-noise:latest
     build: ./noise-api
     networks:
       - "animal-net"
