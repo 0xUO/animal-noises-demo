@@ -4,3 +4,4 @@ markupsafe==2.0.1
 requests
 flask_sqlalchemy
 pymysql
+jinja2==3.0.3
