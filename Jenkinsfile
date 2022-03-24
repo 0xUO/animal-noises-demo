@@ -2,10 +2,8 @@ pipeline {
     agent any
     stages {
         stage('test') {
-            steps {
-                dir('flask-app') {
+            steps {               
                     sh "bash test.sh"
-                }
             }
         }
         stage('build and push') {
