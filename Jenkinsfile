@@ -3,6 +3,7 @@ pipelike {
     stages {
         stage("test") {
             steps {
+                dir('animal-noises-demo')
                 sh "bash test.sh"
             }
 
@@ -10,7 +11,7 @@ pipelike {
     }
     post {
         always{
-            archiveArtifacts artifacts: "htmlcov/*"
+            archiveArtifacts artifacts: "animal-noises/htmlcov/*"
         }
     }
 
