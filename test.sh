@@ -9,4 +9,3 @@ cd ${dir}
 python3 -m pytest -p no:warnings --cov=application --cov-report=html
 cd ..
 done
-
